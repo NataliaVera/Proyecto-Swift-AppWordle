@@ -8,9 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var viewModel = ViewModel()
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        //unir las dos vistas model y game
+        ZStack{
+            VStack(spacing: 40){
+                GameView(viewModel: viewModel)
+                KeyboardView(viewModel: viewModel)
+            }
+            if viewModel.bannerType != nil{
+                BannerView(bannerType: viewModel.bannerType!)
+            }
+        }
     }
 }
 
